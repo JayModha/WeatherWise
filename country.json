@@ -1,13 +1,4 @@
-import express from "express";
-import bodyParser from "body-parser";
-import axios from "axios";
-
-
-
-const port = 3000;
-const app = express();
-const countryJSON =
-  `{
+{
   "afghanistan": "AF",
   "alandislands": "AX",
   "albania": "AL",
@@ -255,50 +246,4 @@ const countryJSON =
   "zimbabwe": "ZW",
   "northmacedonia": "MK",
   "češka": "CZ"
-}`;
-
-const yourAPIKey = `Your API Keys`;
-const countryCodes = JSON.parse(countryJSON);
-
-app.use(express.static("public"));
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.set("view engine", "ejs");
-
-app.get("/", (req, res) => {
-  res.render("index.ejs", { content: "API Response." });
-});
-
-// Replace your app.post handler with this:
-app.post("/", async (req, res) => {
-  const country = req.body.country.toLowerCase().replace(/\s+/g, "");
-  const city = req.body.city;
-  const state = req.body.state;
-  const countryCode = countryCodes[country];
-
-  try {
-    let URL;
-    if (state) {
-      URL = `https://api.openweathermap.org/data/2.5/weather?q=${city},${state},${countryCode}&appid=${yourAPIKey}&units=metric`;
-    } else {
-      URL = `https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${yourAPIKey}&units=metric`;
-    }
-    
-    const response = await axios.get(URL);
-    res.render("index.ejs", { 
-      content: response.data, // This will be the parsed weather data
-      weatherData: response.data // Additional reference for clarity
-    });
-  } catch (error) {
-    console.error("Error fetching weather:", error.message);
-    res.render("index.ejs", { 
-      content: "Sorry, could not fetch weather data. Please check your input.",
-      weatherData: "Sorry, could not fetch weather data. Please check your input."
-    });
-  }
-});
-
-app.listen(port, () => {
-  console.log(`Listening to Port ${port}`);
-});
-
+}

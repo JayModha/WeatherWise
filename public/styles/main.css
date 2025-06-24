@@ -1,63 +1,184 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.maincontainer{
+body {
+    background-color: #F4F6F8;
+    color: #2C3E50;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.maincontainer {
     display: grid;
     grid-template-rows: 1fr 8fr;
     grid-template-columns: 1fr;
     height: 100vh;
     width: 100%;
 }
-#darkmode{
-    text-align: center;
-    height: 30px;
-    width: 100px;
-    margin-top: 25px;
-    margin-right: 50px;
-    border-radius: 50px;
-    cursor: pointer;
-}
 
-.navbar{
+.navbar {
     display: flex;
     justify-content: space-between;
-    background-color:   #688db1;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #89b9ea;
+    color: white;
 }
 
-.navbar img{
+.navbar img {
     height: 80px;
     width: 150px;
 }
 
-.maincontent{
+#darkmode {
+    text-align: center;
+    height: 35px;
+    width: 120px;
+    margin: 20px;
+    border-radius: 50px;
+    background-color: #dfeffa;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+#darkmode:hover {
+    background-color: #2980B9;
+}
+
+.maincontent {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgb(246, 229, 229);
+    background-color: #F4F6F8;
+    padding: 20px;
 }
 
-.contentBlock{
-    display: grid;
-    grid-template-rows: 1fr 1.2fr;
-    grid-template-columns: 1fr;
-    border: 2px solid black;
-    height: 55%;
-    width: 50%;
-}
-
-.imgBlock{
+.imgBlock {
     height: 20%;
     width: 20%;
 }
 
-.displayBlock{
-    border: 2px solid green;
+.contentBlock {
+    display: grid;
+    grid-template-rows: 1fr 1.5fr;
+    grid-template-columns: 1fr;
+    border: 2px solid #22272b;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 20px;
+    width: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+.displayBlock {
+    border: 2px solid #3498DB;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #F9F9F9;
+}
 
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px 0;
+    background-color: #FFFFFF;
+    color: #2C3E50;
+}
 
+form label {
+    font-weight: bold;
+}
 
+form input {
+    padding: 10px;
+    border: 1px solid #BDC3C7;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #F9F9F9;
+    color: #2C3E50;
+    transition: border-color 0.3s;
+}
+
+form input:focus {
+    border-color: #3498DB;
+    outline: none;
+}
+
+form button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #3498DB;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #2980B9;
+}
+.weatherBanner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #d0e7ff;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.weatherBanner img {
+  height: 100px;
+  width: 100px;
+}
+
+.weatherBanner div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tempDisplay {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2C3E50;
+  margin: 10px 0;
+}
+
+/* Add to your existing CSS */
+.dark-mode {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+.dark-mode .contentBlock,
+.dark-mode .displayBlock {
+  background-color: #2d2d2d;
+  color: #f0f0f0;
+  border-color: #444;
+}
+
+.dark-mode form input {
+  background-color: #3d3d3d;
+  color: #f0f0f0;
+  border-color: #555;
+}
+
+.dark-mode .weatherBanner {
+  background-color: #3a4a5a;
+  color: #f0f0f0;
+}
+
+.dark-mode .tempDisplay {
+  color: #f0f0f0;
+}

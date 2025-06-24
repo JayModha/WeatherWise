@@ -1,34 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Wise</title>
-    <link rel="stylesheet" href="styles/main.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Wise</title>
+  <link rel="stylesheet" href="styles/main.css" />
 </head>
+
 <body>
-    <div class="maincontainer">
-        <div class="navbar">
-            <img src="images/fiilogo.png" height="50px" width="80px" alt="">
-            <button id="darkmode">Dark Mode</button>
-        </div>
-        <div class="maincontent">
-            <div class="imgBlock"></div>
-
-
-
-            <div class="contentBlock">
-                <div class="displayBlock">
-
-                </div>
-                <form id="myForm" method="post">
-                    <label for="city">City:</label>
-                    <input type="text" name="city" id="city">
-                </form>
-            </div>
-        </div>
-
+  <div class="maincontainer">
+    <div class="navbar">
+      <img src="images/fiilogo.png" height="50px" width="80px" alt="Weather Wise Logo" />
+      <button id="darkmode">Dark Mode</button>
     </div>
-    <script src="index.js"></script>
+
+    <div class="maincontent">
+      <div class="imgBlock"></div>
+
+      <div class="contentBlock">
+        <div class="displayBlock">
+          <% if (typeof weatherData === 'string') { %>
+            <div class="weatherBanner">
+              <p><%= weatherData %></p>
+            </div>
+          <% } else if (weatherData && weatherData.weather) { %>
+            <div class="weatherBanner">
+              <img src="https://openweathermap.org/img/wn/<%= weatherData.weather[0].icon %>@2x.png" alt="Weather Icon">
+              <div>
+                <h2><%= weatherData.name %>, <%= weatherData.sys.country %></h2>
+                <p><strong><%= weatherData.weather[0].main %></strong> - <%= weatherData.weather[0].description %></p>
+                <p class="tempDisplay"><%= Math.round(weatherData.main.temp) %>°C</p>
+                <p>Feels like: <%= Math.round(weatherData.main.feels_like) %>°C</p>
+                <p>Humidity: <%= weatherData.main.humidity %>%</p>
+                <p>Wind: <%= weatherData.wind.speed %> m/s</p>
+                <p>Pressure: <%= weatherData.main.pressure %> hPa</p>
+              </div>
+            </div>
+          <% } else { %>
+            <div class="weatherBanner">
+              <p>Enter a location to check the weather</p>
+            </div>
+          <% } %>
+        </div>
+
+        <form id="myForm" method="post">
+          <label for="city">City:</label>
+          <input type="text" name="city" id="city" required />
+
+          <label for="state">State (optional):</label>
+          <input type="text" name="state" id="state" />
+
+          <label for="country">Country:</label>
+          <input type="text" name="country" id="country" required placeholder="e.g. United States" />
+
+          <input type="submit" value="Get Weather" />
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dark mode toggle functionality
+    document.getElementById('darkmode').addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('darkMode', isDark);
+      document.getElementById('darkmode').textContent = isDark ? 'Light Mode' : 'Dark Mode';
+    });
+
+    // Check for saved dark mode preference
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+      document.getElementById('darkmode').textContent = 'Light Mode';
+    }
+
+    // Form validation
+    document.getElementById('myForm').addEventListener('submit', (e) => {
+      const city = document.getElementById('city').value.trim();
+      const country = document.getElementById('country').value.trim();
+      
+      if (!city || !country) {
+        e.preventDefault();
+        alert('Please fill in at least city and country fields');
+      }
+    });
+  </script>
 </body>
-</html>
