@@ -257,7 +257,7 @@ const countryJSON =
   "češka": "CZ"
 }`;
 
-const yourAPIKey = `Your API Keys`;
+const yourAPIKey = `a2b6ef95a55fa8e91e052528693de72c`;
 const countryCodes = JSON.parse(countryJSON);
 
 app.use(express.static("public"));
@@ -269,7 +269,6 @@ app.get("/", (req, res) => {
   res.render("index.ejs", { content: "API Response." });
 });
 
-// Replace your app.post handler with this:
 app.post("/", async (req, res) => {
   const country = req.body.country.toLowerCase().replace(/\s+/g, "");
   const city = req.body.city;
@@ -278,23 +277,16 @@ app.post("/", async (req, res) => {
 
   try {
     let URL;
-    if (state) {
-      URL = `https://api.openweathermap.org/data/2.5/weather?q=${city},${state},${countryCode}&appid=${yourAPIKey}&units=metric`;
-    } else {
-      URL = `https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${yourAPIKey}&units=metric`;
-    }
+    URL = `https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${yourAPIKey}&units=metric`;
+
     
     const response = await axios.get(URL);
     res.render("index.ejs", { 
-      content: response.data, // This will be the parsed weather data
-      weatherData: response.data // Additional reference for clarity
+      content: response.data,
     });
+    console.log(response.data);
   } catch (error) {
-    console.error("Error fetching weather:", error.message);
-    res.render("index.ejs", { 
-      content: "Sorry, could not fetch weather data. Please check your input.",
-      weatherData: "Sorry, could not fetch weather data. Please check your input."
-    });
+    
   }
 });
 

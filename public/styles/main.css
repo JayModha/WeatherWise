@@ -64,6 +64,15 @@ body {
     width: 20%;
 }
 
+.weatherRow{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(3, 189, 31, 0.729);
+  font-family: "VT323";
+  font-size: 50px;
+}
+
 .contentBlock {
     display: grid;
     grid-template-rows: 1fr 1.5fr;
@@ -81,7 +90,7 @@ body {
     border-radius: 5px;
     margin-bottom: 15px;
     padding: 10px;
-    background-color: #F9F9F9;
+    background-color: #332f2f;
 }
 
 form {
@@ -89,7 +98,7 @@ form {
     flex-direction: column;
     gap: 15px;
     padding: 10px 0;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     color: #2C3E50;
 }
 
@@ -155,7 +164,6 @@ form button:hover {
   margin: 10px 0;
 }
 
-/* Add to your existing CSS */
 .dark-mode {
   background-color: #1a1a1a;
   color: #f0f0f0;

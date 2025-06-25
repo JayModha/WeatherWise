@@ -6,6 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weather Wise</title>
   <link rel="stylesheet" href="styles/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Pixelify+Sans:wght@400..700&family=VT323&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
@@ -20,28 +29,21 @@
 
       <div class="contentBlock">
         <div class="displayBlock">
-          <% if (typeof weatherData === 'string') { %>
-            <div class="weatherBanner">
-              <p><%= weatherData %></p>
+          <% if (typeof content==="object" && content.weather) { %>
+            <div class="weatherRow">
+              <p class="weatherType">
+                <%= content.weather[0].main %>
+              </p>
+              <img class="weatherIcon" src="https://openweathermap.org/img/wn/<%= content.weather[0].icon %>@2x.png"
+                alt="Weather Icon" />
+              <p class="weatherTemp">
+                <%= Math.round(content.main.temp) %>°C
+              </p>
             </div>
-          <% } else if (weatherData && weatherData.weather) { %>
-            <div class="weatherBanner">
-              <img src="https://openweathermap.org/img/wn/<%= weatherData.weather[0].icon %>@2x.png" alt="Weather Icon">
-              <div>
-                <h2><%= weatherData.name %>, <%= weatherData.sys.country %></h2>
-                <p><strong><%= weatherData.weather[0].main %></strong> - <%= weatherData.weather[0].description %></p>
-                <p class="tempDisplay"><%= Math.round(weatherData.main.temp) %>°C</p>
-                <p>Feels like: <%= Math.round(weatherData.main.feels_like) %>°C</p>
-                <p>Humidity: <%= weatherData.main.humidity %>%</p>
-                <p>Wind: <%= weatherData.wind.speed %> m/s</p>
-                <p>Pressure: <%= weatherData.main.pressure %> hPa</p>
-              </div>
-            </div>
-          <% } else { %>
-            <div class="weatherBanner">
-              <p>Enter a location to check the weather</p>
-            </div>
-          <% } %>
+            <% } else { %>
+              <p class="weatherBanner">Waiting for API data...</p>
+              <% } %>
+
         </div>
 
         <form id="myForm" method="post">
@@ -61,7 +63,6 @@
   </div>
 
   <script>
-    // Dark mode toggle functionality
     document.getElementById('darkmode').addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
       const isDark = document.body.classList.contains('dark-mode');
@@ -69,21 +70,11 @@
       document.getElementById('darkmode').textContent = isDark ? 'Light Mode' : 'Dark Mode';
     });
 
-    // Check for saved dark mode preference
     if (localStorage.getItem('darkMode') === 'true') {
       document.body.classList.add('dark-mode');
       document.getElementById('darkmode').textContent = 'Light Mode';
     }
-
-    // Form validation
-    document.getElementById('myForm').addEventListener('submit', (e) => {
-      const city = document.getElementById('city').value.trim();
-      const country = document.getElementById('country').value.trim();
-      
-      if (!city || !country) {
-        e.preventDefault();
-        alert('Please fill in at least city and country fields');
-      }
-    });
   </script>
 </body>
+
+</html>
