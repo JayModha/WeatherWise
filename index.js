@@ -257,7 +257,10 @@ const countryJSON =
   "češka": "CZ"
 }`;
 
-const yourAPIKey = `a2b6ef95a55fa8e91e052528693de72c`;
+import dotenv from "dotenv";
+dotenv.config();
+const yourAPIKey = process.env.yourAPIKey;
+
 const countryCodes = JSON.parse(countryJSON);
 
 app.use(express.static("public"));
