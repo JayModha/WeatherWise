@@ -2,8 +2,6 @@ import express from "express";
 import bodyParser from "body-parser";
 import axios from "axios";
 
-
-
 const port = 3000;
 const app = express();
 const countryJSON =
